@@ -1,20 +1,13 @@
 from datetime import date
-from enum import Enum
 
 
 class Note:
-    class Priority(Enum):
-        lower = 1
-        medium = 2
-        high = 3
-
-    def __init__(self, id_note: int, title: str, content: str, priority=Priority.lower):
+    def __init__(self, id_note: int, title: str, content: str, date_create: str, date_update: str = None):
         self.__id = id_note
         self.__title = title
         self.__content = content
-        self.__priority = priority
-        self.__date_of_create = date.today()
-        self.__date_of_update = None
+        self.__date_of_create = date_create
+        self.__date_of_update = date_update
 
     def get_id(self):
         return self.__id
@@ -24,9 +17,6 @@ class Note:
 
     def get_content(self):
         return self.__content
-
-    def get_priority(self):
-        return self.__priority
 
     def get_date_of_create(self):
         return self.__date_of_create
@@ -42,9 +32,14 @@ class Note:
         self.__content = content
         return self
 
-    def set_priority(self, priority: Priority):
-        self.__priority = priority
+    def set_date_of_update(self):
+        self.__date_of_update = str(date.today())
         return self
 
-    def __str__(self):
-        return f'{self.get_title()}\n{self.get_content()}\n{self.get_priority()}\n{self.get_date_of_create()}'
+    def get_data(self):
+        return {'id': self.__id,
+                'title': self.__title,
+                'content': self.__content,
+                'date_of_create': self.__date_of_create,
+                'date_of_update': self.__date_of_update
+                }

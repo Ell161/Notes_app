@@ -1,10 +1,12 @@
-from Notes_app.service.Filter import Filter
+from service.Filter import Filter
 
 
 class TitleFilter(Filter):
-    def filter(self, items, specification):
-        filter_items = []
-        for item in items:
-            if specification.is_satisfied(item.get_title()):
-                filter_items.append(item)
+
+    @classmethod
+    def filter(cls, collection, specification):
+        filter_items = {}
+        for key, value in collection.items():
+            if specification.is_satisfied(value.get_title()):
+                filter_items[key] = value
         return filter_items

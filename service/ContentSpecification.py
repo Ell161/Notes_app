@@ -1,4 +1,4 @@
-from Notes_app.service.Specification import Specification
+from service.Specification import Specification
 
 
 class ContentSpecification(Specification):
