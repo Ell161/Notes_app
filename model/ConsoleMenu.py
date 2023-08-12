@@ -13,6 +13,11 @@ class ConsoleMenu:
     def get_item(self, index):
         return self.items[index]
 
+    def get_item_by_name(self, name):
+        for item in self.items:
+            if name.lower() == item.get_name().lower():
+                return item
+
     def extend_items(self, items):
         self.items.extend(items)
 

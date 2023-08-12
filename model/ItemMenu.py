@@ -4,6 +4,9 @@ class ItemMenu:
         self.function = function
         self.data = data
 
+    def get_name(self):
+        return self.name
+
     def get_function(self):
         return self.function()
 
@@ -19,8 +22,8 @@ class ItemMenu:
     def draw(self, point):
         if self.data is not None:
             if self.data.get('date_of_update') is not None:
-                print(f'[{point}]  {self.name}\t\t{self.data.get("date_of_update")}')
+                print(f'[{point}]  {self.name:50} {self.data.get("date_of_update")}')
             elif self.data.get('date_of_create') is not None:
-                print(f'[{point}]  {self.name}\t\t{self.data.get("date_of_create")}')
+                print(f'[{point}]  {self.name:50} {self.data.get("date_of_create")}')
         else:
             print(f'[{point}]  {self.name}')

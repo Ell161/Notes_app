@@ -22,6 +22,12 @@ class NoteDataService(DataService):
         return self._notes
 
     def create(self, **kwargs):
+        """
+        Creates an instance of the Note class. Updates and writes data to a file.
+
+        :param kwargs: title, content (required parameters),
+        id, date_of_create, date_of_update (additional parameters)
+        """
         id_note = kwargs.get('id')
         if id_note is None:
             id_note = self.__get_id()
@@ -37,6 +43,11 @@ class NoteDataService(DataService):
         FileService().write_to_file(data_file, 'data.json')
 
     def update(self, **kwargs):
+        """
+        Updates an instance of the Note class. Updates and writes data to a file.
+
+        :param kwargs: id, title, content (required parameters)
+        """
         id_update_note = kwargs.get('id')
         title = kwargs.get('title')
         content = kwargs.get('content')
@@ -49,12 +60,16 @@ class NoteDataService(DataService):
         FileService().write_to_file(data_file, 'data.json')
 
     def delete(self, **kwargs):
-        try:
-            id_delete_note = kwargs.get('id')
-            if id_delete_note is not None:
-                self._notes.pop(id_delete_note)
-        except:
-            pass
+        """
+        Updates an instance of the Note class. Updates and writes data to a file.
+
+        :param kwargs: id the Note class instance (required parameters)
+        """
+        id_delete_note = kwargs.get('id')
+        if id_delete_note is not None and self._notes.get(id_delete_note) is not None:
+            self._notes.pop(id_delete_note)
+            data_file = {key: value.get_data() for (key, value) in self._notes.items()}
+            FileService().write_to_file(data_file, 'data.json')
 
     def __get_id(self):
         return str(round(time.time()))
